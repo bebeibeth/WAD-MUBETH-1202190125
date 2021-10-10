@@ -1,0 +1,15 @@
+body,
+html {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content-container{
+    padding: 60px;
+    background-color: #e9ecef ;
+}
+
+.paddingtop{
+    margin-top:5vh;
+    /* width: 30vw;
+    height: 90vh; */
+}
