@@ -29,7 +29,7 @@
 
     <!-- PHP Section -->
     <?php
-        require 'db_conn.php';
+        require 'conn.php';
     ?>
 
    <!-- Content -->

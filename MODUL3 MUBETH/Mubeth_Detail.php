@@ -32,7 +32,7 @@
     <?php
         require 'db_conn.php';
         session_start();
-        if(isset($_GET['id'])) {
+        if(isset($_GET['I'])) {
             $id_num = $_GET['id'];
             $row = query("SELECT * FROM Buku_table WHERE id=$id_num")[0];
             $_SESSION['id_no'] = $id_num;

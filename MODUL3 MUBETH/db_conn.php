@@ -1,5 +1,5 @@
 <?php 
-    $conn = mysqli_connect("localhost", "root", "", "Modul3"); //debug
+    $conn = mysqli_connect("localhost", "root", "", "Modu3"); //debug
 
     if(!$conn) {
 		die("Tidak ada database bro : ".mysql_connect_error());
