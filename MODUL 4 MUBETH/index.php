@@ -73,6 +73,7 @@ if (isset($_POST["add3"])) {
 
 <!-- NAVBAR -->
 <body class= "bg-secondary">
+    <?php if ($_COOKIE["navbar"] == "BlueOcean") : ?>
         <nav class="navbar navbar-expand-sm navbar-dark bg-info">
             <a class="navbar-brand mb-0 h1" href="index.php">EAD TRAVEL</a>
             <div class="collapse navbar-collapse">
@@ -96,7 +97,31 @@ if (isset($_POST["add3"])) {
                 </ul>
             </div>
         </nav>
-
+<?php else : ?>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <a class="navbar-brand mb-0 h1" href="index.php">EAD TRAVEL</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="bookings.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="navbar-text text-light">Selamat Datang, </span>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $_SESSION["nama"] ?></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile.php">Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <?php endif; ?>
 
 <!--ISI CONTENT-->
 <div class="container mt-3">

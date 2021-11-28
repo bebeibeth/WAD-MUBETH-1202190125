@@ -64,10 +64,12 @@ $result = mysqli_query($conn, "SELECT * FROM user WHERE id=$id");
 $user = mysqli_fetch_assoc($result);
 ?>
 
-<body class= "bg-dark">
+<body class= "bg-secondary">
 
     <!--NAVBAR-->
-<body class= "bg-secondary">
+
+
+<?php if ($_COOKIE["navbar"] == "BlueOcean") : ?>
         <nav class="navbar navbar-expand-sm navbar-dark bg-info">
             <a class="navbar-brand mb-0 h1" href="index.php">EAD TRAVEL</a>
             <div class="collapse navbar-collapse">
@@ -91,6 +93,31 @@ $user = mysqli_fetch_assoc($result);
                 </ul>
             </div>
         </nav>
+<?php else : ?>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <a class="navbar-brand mb-0 h1" href="index.php">EAD TRAVEL</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="bookings.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="navbar-text text-light">Selamat Datang, </span>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $_SESSION["nama"] ?></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile.php">Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <?php endif; ?>
 
 <!--CONTENT PROFILE-->
 <div class="container mt-4">
@@ -144,8 +171,8 @@ $user = mysqli_fetch_assoc($result);
                             <label for="navbar" class="col-sm-3 col-form-label">Warna Navbar</label>
                             <div class="col-sm-9">
                                 <select id="navbar" name="navbar" class="form-control">
-                                    <option value="default">Blue Ocean</option>
-                                    <option value="light">Dark Boba</option>
+                                    <option value="BlueOcean">Blue Ocean</option>
+                                    <option value="DarkBoba">Dark Boba</option>
                                 </select>
                             </div>
                         </div>
