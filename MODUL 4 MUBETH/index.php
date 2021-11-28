@@ -37,10 +37,10 @@ if (isset($_POST["add1"])) {
     $user_id = $_SESSION["user_id"];
     $nama_tempat = $_POST["nama_tempat"];
     $lokasi = $_POST["lokasi"];
-    $harga = (int)$_POST["harga"];
+    $harga = $_POST["harga"];
     $date = $_POST["eventdate"];
 
-    $query = "INSERT INTO bookings VALUES ('', $user_id, 'Kelingking Beach', 'Bali', 169000, '$date')";
+    $query = "INSERT INTO bookings VALUES (NULL, $user_id, '$nama_tempat', '$lokasi', '$harga', '$date')";
     $result = mysqli_query($conn, $query);
     $message = "Barang berhasil ditambahkan ke keranjang";
 }
@@ -52,19 +52,19 @@ if (isset($_POST["add2"])) {
     $harga = $_POST["harga2"];
     $date = $_POST["eventdate2"];
 
-    $query = "INSERT INTO bookings VALUES ('', $user_id, '$nama_tempat', '$lokasi', $harga, '$date')";
+    $query = "INSERT INTO bookings VALUES (NULL, $user_id, '$nama_tempat', '$lokasi', '$harga', '$date')";
     $result = mysqli_query($conn, $query);
     $message = "Barang berhasil ditambahkan ke keranjang";
 }
 
 if (isset($_POST["add3"])) {
-    $nama_tempat = $_POST["nama_tempat"];
+    $nama_tempat = $_POST["nama_tempat3"];
     $user_id = $_SESSION["user_id"];
-    $lokasi = $_POST["lokasi"];
-    $harga = $_POST["harga"];
-    $date = $_POST["eventdate"];
+    $lokasi = $_POST["lokasi3"];
+    $harga = $_POST["harga3"];
+    $date = $_POST["eventdate3"];
 
-    $query = "INSERT INTO bookings VALUES ('', $user_id, '$nama_tempat', '$lokasi', $harga, '$date')";
+    $query = "INSERT INTO bookings VALUES ('', $user_id, '$nama_tempat', '$lokasi', '$harga', '$date')";
     $result = mysqli_query($conn, $query);
     $message = "Barang berhasil ditambahkan ke keranjang";
 }
@@ -172,11 +172,33 @@ if (isset($_POST["add3"])) {
                                     Rp180.000
                                 </div>
                                 <div class="card-footer">
-                                    <input type="hidden" name="nama_tempat" value="Kenawa Island">
-                                    <input type="hidden" name="lokasi" value="Nusa Tenggara Barat">
-                                    <input type="hidden" name="harga" value=180000>
-                                    <button type="button" data-target="#modalDate" data-toggle="modal" class="btn btn-info btn-block">Tambahkan ke Keranjang</button>
+                                    <input type="hidden" name="nama_tempat2" value="Kenawa Island">
+                                    <input type="hidden" name="lokasi2" value="Nusa Tenggara Barat">
+                                    <input type="hidden" name="harga2" value=180000>
+                                    <button type="button" data-target="#modalDate2" data-toggle="modal" class="btn btn-info btn-block">Tambahkan ke Keranjang</button>
                                 </div>
+                                <!---Modal 2-->
+                                <div class="modal fade" id="modalDate2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Pilih Tanggal Perjalanan</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">Event Date
+                                                <input type="date" class="form-control" name='eventdate2'></input>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="hidden" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" name="add2" class="btn btn-primary">Tambahkan</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>   
                             </form>
                         </div>
                     </td>
@@ -193,11 +215,33 @@ if (isset($_POST["add3"])) {
                                     Rp108.000
                                 </div>
                                 <div class="card-footer">
-                                    <input type="hidden" name="nama_tempat" value="Bukit Tanarara">
-                                    <input type="hidden" name="lokasi" value="Nusa Tenggara Timur">
-                                    <input type="hidden" name="harga" value=108000>
+                                    <input type="hidden" name="nama_tempat3" value="Bukit Tanarara">
+                                    <input type="hidden" name="lokasi3" value="Nusa Tenggara Timur">
+                                    <input type="hidden" name="harga3" value=108000>
                                     <button type="button" data-target="#modalDate" data-toggle="modal" class="btn btn-info btn-block">Tambahkan ke Keranjang</button>
                                 </div>
+                                <!---Modal 3-->
+                                <div class="modal fade" id="modalDate2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Pilih Tanggal Perjalanan</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">Event Date
+                                                <input type="date" class="form-control" name='eventdate3'></input>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="hidden" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" name="add3" class="btn btn-primary">Tambahkan</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div> 
                             </form>
                         </div>
                     </td>
