@@ -64,7 +64,7 @@ if (isset($_POST["add3"])) {
     $harga = $_POST["harga3"];
     $date = $_POST["eventdate3"];
 
-    $query = "INSERT INTO bookings VALUES ('', $user_id, '$nama_tempat', '$lokasi', '$harga', '$date')";
+    $query = "INSERT INTO bookings VALUES (NULL, $user_id, '$nama_tempat', '$lokasi', '$harga', '$date')";
     $result = mysqli_query($conn, $query);
     $message = "Barang berhasil ditambahkan ke keranjang";
 }
@@ -227,8 +227,8 @@ if (isset($_POST["add3"])) {
                             </form>
                         </div>
                     </td>
-                    <td>
 
+                    <td>
                         <div class="card">
                             <form method="POST">
                                 <img class="card-img-top" src="https://tripsumba.com/wp-content/uploads/2020/07/Bukit-Tanarara-Sumba.jpg" height="270px">
@@ -243,10 +243,10 @@ if (isset($_POST["add3"])) {
                                     <input type="hidden" name="nama_tempat3" value="Bukit Tanarara">
                                     <input type="hidden" name="lokasi3" value="Nusa Tenggara Timur">
                                     <input type="hidden" name="harga3" value=108000>
-                                    <button type="button" data-target="#modalDate" data-toggle="modal" class="btn btn-info btn-block">Tambahkan ke Keranjang</button>
+                                    <button type="button" data-target="#modalDate3" data-toggle="modal" class="btn btn-info btn-block">Tambahkan ke Keranjang</button>
                                 </div>
                                 <!---Modal 3-->
-                                <div class="modal fade" id="modalDate2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade" id="modalDate3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
@@ -270,10 +270,10 @@ if (isset($_POST["add3"])) {
                             </form>
                         </div>
                     </td>
+
                 </tr>
-                </form>
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </div>
 
 </body>
