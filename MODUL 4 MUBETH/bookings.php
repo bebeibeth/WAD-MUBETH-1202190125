@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookings | Bosan TP</title>
+    <title>Bookings</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -43,6 +43,7 @@ $daftar_tempat = mysqli_query($conn, "SELECT * FROM bookings WHERE user_id=$user
 
 <!-- NAVBAR -->
 <body class= "bg-secondary">
+    <?php if ($_COOKIE["navbar"] == "BlueOcean") : ?>
         <nav class="navbar navbar-expand-sm navbar-dark bg-info">
             <a class="navbar-brand mb-0 h1" href="index.php">EAD TRAVEL</a>
             <div class="collapse navbar-collapse">
@@ -66,7 +67,31 @@ $daftar_tempat = mysqli_query($conn, "SELECT * FROM bookings WHERE user_id=$user
                 </ul>
             </div>
         </nav>
-
+<?php else : ?>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <a class="navbar-brand mb-0 h1" href="index.php">EAD TRAVEL</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="bookings.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="navbar-text text-light">Selamat Datang, </span>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $_SESSION["nama"] ?></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile.php">Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <?php endif; ?>
 <!--CONTENT-->
         <div class="container mt-4">
         <?php if ($message) : ?>
