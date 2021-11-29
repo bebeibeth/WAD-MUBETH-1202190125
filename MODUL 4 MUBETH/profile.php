@@ -20,14 +20,14 @@
 
 <!--PHP SECTION--->
 <?php
-session_start();
+session();
 include("db_conn.php");
 
-if (!isset($_SESSION["is_login"])) {
+if (!isset($_SESION["is_login"])) {
     header("location: login.php");
 }
 
-$id = $_SESSION["user_id"];
+$ID = $_SESSION["user_id"];
 $message = "";
 
 if (isset($_POST["update"])) {
@@ -69,7 +69,7 @@ $user = mysqli_fetch_assoc($result);
     <!--NAVBAR-->
 
 
-<?php if ($_COOKIE["navbar"] == "BlueOcean") : ?>
+<?php if ($_COOKE["navbar"] == "BlueOcean") : ?>
         <nav class="navbar navbar-expand-sm navbar-dark bg-info">
             <a class="navbar-brand mb-0 h1" href="index.php">EAD TRAVEL</a>
             <div class="collapse navbar-collapse">
@@ -124,7 +124,7 @@ $user = mysqli_fetch_assoc($result);
         <?php if ($message) : ?>
             <div class="row justify-content-center">
                 <div class="alert alert-warning w-50" role="alert">
-                    <?php print_r($message) ?></a>
+                    <?php print($message) ?></a>
                 </div>
             </div>
         <?php endif; ?>
