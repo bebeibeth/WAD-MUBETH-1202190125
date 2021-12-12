@@ -7,11 +7,11 @@
         <h3>List Vaccine</h3>
     </div>
 
+    @if ($vaccines->isNotEmpty())
     <div class="row mt-3">
         @foreach ($vaccines as $vaccine)
         <div class="col-md-4 justify-content-center">
             <div class="card">
-                {{-- <img src="..." class="card-img-top" alt="..."> --}}
                 <img src="/storage/{{$vaccine->image}}" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{$vaccine->name}}</h5>
@@ -80,6 +80,7 @@
     </div>
     @endif
 
+
     <div class="d-flex justify-content-center mt-5">
         <h3>List Patient</h3>
     </div>
@@ -92,6 +93,7 @@
                 <th class="col">Nama Pasien</th>
                 <th class="col">Vaccine</th>
                 <th class="col">NIK</th>
+                <th class="col">KTP</th>
                 <th class="col">Alamat</th>
                 <th class="col">No HP</th>
                 <th class="col-md-2">Action</th>
