@@ -1,49 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+@extends('layout')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+@section('main')
 
-    <!-- jQuery and JS bundle w/ Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<div class="container mt-3">
+    <div class="d-flex justify-content-center">
+        <h3>List Vaccine</h3>
+    </div>
 
-    <!-- FONT AWESOME -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Datepicker CSS -->
-    <link rel="stylesheet" href="css/datepicker.css">
-
-    <!-- Datepicker JS-->
-    <script src="js/datepicker.js"></script>
-
-    <title>EAD TRAVEl</title>
-</head>
-<body>
-<!-- NAVBAR -->
-<body>
-<nav class="navbar navbar-light navbar-expand-md bg-light justify-content-md-center justify-content-start">
-        <a class="navbar-brand d-md-none d-inline" href="">Brand</a>
-        <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
-            <span class="navbar-toggler-icon"></span>
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addvaccine">
+            Add Vaccine
         </button>
-        <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
-            <ul class="navbar-nav mx-auto text-md-center text-left">
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">HOME</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">VACCINE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">PATIENT</a>
-            </ul>
+    </div>
+
+    @if ($vaccines->isNotEmpty())
+    <table class="table table-striped mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th class="col-md-1">#</th>
+                <th class="col">Name</th>
+                <th class="col-md-3">Image</th>
+                <th class="col-md-3">Price</th>
+                <th class="col-md-2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($vaccines as $vaccine)
+            <tr>
+                <th>{{$vaccine->id}}</th>
+                <td>{{$vaccine->name}}</td>
+                <td>{{$vaccine->image}}</td>
+                <td>{{$vaccine->price}}</td>
+                <td>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#editvaccine{{$vaccine->id}}" class="btn btn-warning mr-5">Edit</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#deletevaccine{{$vaccine->id}}" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
+    <div class="d-flex justify-content-center mt-3">
+        Theres no data vaccine yet.
+    </div>
+    @endif
+
+    {{-- modal add vaccine --}}
+    <div class="modal fade" id="addvaccine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Vaccine</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/vaccine" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <label for="basic-url" class="form-label">Vaccine Name</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="name">
+                        </div>
+
+                        <label for="basic-url" class="form-label">Price</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Rp</span>
+                            <input type="number" class="form-control" name="price">
+                        </div>
+
+                        <label for="basic-url" class="form-label">Description</label>
+                        <div class="input-group mb-3">
+                            <input type="textarea" class="form-control" name="description">
+                        </div>
+
+                        <label for="basic-url" class="form-label">Image</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" name="image">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+
+            </div>
         </div>
-    </nav>
+    </div>
 
+    @foreach ($vaccines as $vaccine)
+    {{-- modal edit vaccine --}}
+    <div class="modal fade" id="editvaccine{{$vaccine->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Vaccine</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/vaccine/update/{{$vaccine->id}}" method="post">
+                    @csrf
+                    @method('patch')
+                    <div class="modal-body">
+                        <label for="basic-url" class="form-label">Vaccine Name</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="name" value="{{$vaccine->name}}">
+                        </div>
 
-</body>
+                        <label for="basic-url" class="form-label">Price</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Rp</span>
+                            <input type="number" class="form-control" name="price" value="{{$vaccine->price}}">
+                        </div>
+
+                        <label for="basic-url" class="form-label">Description</label>
+                        <div class="input-group mb-3">
+                            <input type="textarea" class="form-control" name="description" value="{{$vaccine->description}}">
+                        </div>
+
+                        <label for="basic-url" class="form-label">Image</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" name="image">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {{-- modal delete vaccine --}}
+    <div class="modal fade" id="deletevaccine{{$vaccine->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Vaccine</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/vaccine/delete/{{$vaccine->id}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <div class="modal-body">
+                        <h3>Are you sure delete "{{$vaccine->name}}"</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+
+@endsection
+
