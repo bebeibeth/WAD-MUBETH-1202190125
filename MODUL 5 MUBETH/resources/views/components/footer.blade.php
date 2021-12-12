@@ -16,6 +16,11 @@
               <div class="modal-body text-align">
                 <p>Nama   :  Mubeth Praditya</p>
                 <p>NIM    :  1202190125</p>
+                <p>Pesan <br>Suwun ngge sakkabehe mas mbak asprak sampun maringi ilmu ingkang katah lan mboten medhit ilmu mugi Gusti sing bales apik e. 
+                  Saking kulo pribadi mboten nduweni kesan 
+                  pesan nanging kulo dengan bahagia ngerasaaken 
+                  seneng lan mumet saestu, saking kulo pribadi 
+                  yen nduweni salah nyuwun pangapunten. Sekian wassalamualaikum wrwb</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>

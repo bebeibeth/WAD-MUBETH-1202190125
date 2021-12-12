@@ -92,7 +92,7 @@
                 <th class="col-md-1">#</th>
                 <th class="col">Nama Pasien</th>
                 <th class="col">Vaccine</th>
-                <th class="col">NIK</th>
+                <th class="col">Gambar</th>
                 <th class="col">KTP</th>
                 <th class="col">Alamat</th>
                 <th class="col">No HP</th>
