@@ -9,15 +9,15 @@
     <title>EAD Public Health Center</title>
 </head>
 <body>
-    @include('components.navbar')
+    @include('components/navbar')
 
     <div class="d-flex justify-content-center my-3">
-        @include('components.session')
+        @include('components/session')
     </div>
     @yield('main')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
-
     @include('components.footer')
+
 </html>
