@@ -12,6 +12,7 @@
         <div class="col-md-4 justify-content-center">
             <div class="card">
                 {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                <img src="/storage/{{$vaccine->image}}" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{$vaccine->name}}</h5>
                     <p class="text-secondary">{{$vaccine->price}}</p>
@@ -29,7 +30,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Register {{$vaccine->name}} Patient</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="/patient/{{$vaccine->id}}" method="post">
+                    <form action="/patient/{{$vaccine->id}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <label for="basic-url" class="form-label">Vaccine Name</label>
@@ -73,7 +74,11 @@
         </div>
         @endforeach
     </div>
-
+    @else
+    <div class="d-flex justify-content-center mt-3">
+        Theres no vaccines yet.
+    </div>
+    @endif
 
     <div class="d-flex justify-content-center mt-5">
         <h3>List Patient</h3>
@@ -98,6 +103,7 @@
                 <th>{{$patient->id}}</th>
                 <th>{{$patient->name}}</th>
                 <td>{{$patient->vaccine->name}}</td>
+                <td><img src="/storage/{{$patient->image_ktp}}" width="150px" alt=""></td>
                 <td>{{$patient->nik}}</td>
                 <td>{{$patient->alamat}}</td>
                 <td>{{$patient->no_hp}}</td>
@@ -115,7 +121,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">Edit Patient</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="/patient/update/{{$patient->id}}" method="post">
+                        <form action="/patient/update/{{$patient->id}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('patch')
                             <div class="modal-body">
@@ -140,6 +146,11 @@
                                 </div>
 
                                 <label for="basic-url" class="form-label">Image</label>
+                                @isset($patient->image_ktp)
+                                <div class="mb-3 p-0">
+                                    <img src="/storage/{{$patient->image_ktp}}" width="200px" alt="">
+                                </div>
+                                @endisset
                                 <div class="input-group mb-3">
                                     <input type="file" class="form-control" name="image_ktp" value="{{$patient->image_ktp}}">
                                 </div>

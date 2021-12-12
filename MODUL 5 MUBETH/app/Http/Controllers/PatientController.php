@@ -2,50 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\patient;
 use App\Models\vaccine;
 use Illuminate\Http\Request;
 
-class PatientController extends Controller
+class VaccineController extends Controller
 {
     public function index()
     {
         $vaccines = vaccine::get();
-        $patients = patient::get();
-
-        return view('patient', compact('vaccines', 'patients'));
+        return view('vaccine', compact('vaccines'));
     }
 
-    public function store(vaccine $vaccine)
+    public function store()
     {
         $attr = request()->validate([
             'name' => 'required',
-            'nik' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
+            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'description' => 'required'
         ]);
 
-        $attr['vaccine_id'] = $vaccine->id;
-        patient::create($attr);
-        return redirect()->back()->with('success', 'Success register patient.');
+        if (request()->file('image')) {
+            $attr['image'] = request()->file('image')->store('img-vaccine');
+        }
+        vaccine::create($attr);
+        return redirect()->back()->with('success', 'Success add vaccine.');
     }
 
-    public function update(patient $patient)
+    public function update(vaccine $vaccine)
     {
         $attr = request()->validate([
             'name' => 'required',
-            'nik' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
+            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'description' => 'required'
         ]);
 
-        $patient->update($attr);
-        return redirect()->back()->with('success', 'Success update patient.');
+        if (request()->file('image')) {
+            \Storage::delete($vaccine->image);
+            $updateimg = request()->file('image')->store('img-vaccine');
+        } else {
+            $updateimg = $vaccine->image;
+        }
+
+        $attr['image'] = $updateimg;
+        $vaccine->update($attr);
+        return redirect()->back()->with('success', 'Success update vaccine.');
     }
 
-    public function destroy(patient $patient)
+    public function destroy(vaccine $vaccine)
     {
-        $patient->delete();
-        return redirect()->back()->with('success', 'Success delete patient.');
+        \Storage::delete($vaccine->image);
+        $vaccine->patient()->delete();
+        $vaccine->delete();
+        return redirect()->back()->with('success', 'Success delete vaccine.');
     }
 }
