@@ -125,7 +125,7 @@
                         </div>
                         <form action="/patient/update/{{$patient->id}}" method="post" enctype="multipart/form-data">
                             @csrf
-                            @method('patch')
+                            @method('')
                             <div class="modal-body">
                                 <label for="basic-url" class="form-label">Vaccine Name</label>
                                 <div class="input-group mb-3">

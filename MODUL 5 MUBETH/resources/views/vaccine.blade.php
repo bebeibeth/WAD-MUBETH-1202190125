@@ -13,7 +13,7 @@
         </button>
     </div>
 
-    @if ($vaccines->isNotEmpty())
+    @if ($vaccinesisNotEmpty())
     <table class="table table-striped mt-3">
         <thead class="table-dark">
             <tr>
